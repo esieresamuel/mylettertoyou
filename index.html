@@ -11,7 +11,8 @@
   <!-- partial:index.partial.html -->
   <!--
 -->
-<button onclick="playMusic()" style="padding:30px;position:absolute;z-index:9999999;">Play Music</button>
+<button id="audioControl" onclick="togglePlay()" style="background-color:red;color:white;padding:10px;">Play Sound</button>
+
 
   <div class="carousel">
     <h1 style="color:white;text-align:center;font-size:50px;margin-top:30px;">Happy Valentine's Day<br>Peaches🥹❤️</>
@@ -118,13 +119,27 @@
   <script src="./script.js"></script>
   
   <script>
-     function playMusic() {
-    // Replace 'music.mp3' with your actual file path
-    var music = new Audio('music.mp3');
-    music.play();
+     var audio = new Audio('music.mp3');
+  var isPlaying = false;
+
+  function togglePlay() {
     alert("playing");
-  }
-  alert("I love you");
+    var button = document.getElementById("audioControl");
+    if (isPlaying) {
+      audio.pause();
+      button.innerHTML = "Play Sound";
+    } else {
+      audio.play();
+      button.innerHTML = "Pause Sound";
+    }
+  };
+
+  audio.onplaying = function() {
+    isPlaying = true;
+  };
+  audio.onpause = function() {
+    isPlaying = false;
+  };
 </script>
 
 </body>
