@@ -118,26 +118,26 @@
   <script src="./script.js"></script>
   
   <script>
-  var audio = new Audio('music.mp3');
-  var isPlaying = false;
+     const volume = 0.2;
+el.blup.volume = volume;
+el.blop.volume = volume;
 
-  function togglePlay() {
-    var button = document.getElementById("audioControl");
-    if (isPlaying) {
-      audio.pause();
-      button.innerHTML = "Play Sound";
+const toggleSound = () => {
+  let on = true;
+  return () => {
+    if (on) {
+      el.blup.volume = 0.0;
+      el.blop.volume = 0.0;
+      el.sound.classList.add("sound--off");
     } else {
-      audio.play();
-      button.innerHTML = "Pause Sound";
+      el.blup.volume = volume;
+      el.blop.volume = volume;
+      el.sound.classList.remove("sound--off");
     }
+    on = !on;
   };
-
-  audio.onplaying = function() {
-    isPlaying = true;
-  };
-  audio.onpause = function() {
-    isPlaying = false;
-  };
+};
+el.sound.addEventListener("click", toggleSound());
 </script>
 
 </body>
